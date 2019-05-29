@@ -34,16 +34,18 @@ function validateCreateUserRequest(req) {
 
 function validateUpdateUserRequest(req) {
   req
-    .checkBody('oldEmail', 'user oldEmail is required/invalid')
+    .checkBody('email', 'user email is required/invalid')
     .isEmail()
     .exists();
   req
-    .checkBody('newEmail', 'user newEmail is required/invalid')
-    .isEmail()
+    .checkBody('firstName', 'user firstName is required')
+    .isString()
+    .isLength({ min: 3 })
     .exists();
   req
-    .checkBody('password', 'user password is required')
-    .isLength({ min: 6 })
+    .checkBody('lastName', 'user lastName is required')
+    .isString()
+    .isLength({ min: 3 })
     .exists();
   return req.validationErrors();
 }

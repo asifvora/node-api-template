@@ -4,7 +4,8 @@ const {
   validateUpdateUserRequest,
   validateChangePasswordRequest,
 } = require('./users.request.validators');
-const { createNewUser, loginUser, updateUser, changeUserPassword, deleteUser } = require('./users.services');
+const { createNewUser, loginUser, updateUser,
+  changeUserPassword, deleteUser, getUsers } = require('./users.services');
 const { sendResponse, handleCustomError } = require('../../utils');
 const ResponseMessages = require('../../constants/responseMessages');
 
@@ -50,10 +51,10 @@ async function updateUserController(req, res) {
       return sendResponse(res, 422, {}, validationErr[0].msg);
     }
 
-    const { oldEmail, newEmail, password } = req.body;
-    const { id: userId } = req.user;
+    const { email, firstName, lastName } = req.body;
+    const { userId } = req.params;
+    const data = await updateUser({ id: userId, firstName, lastName, email });
 
-    const data = await updateUser({ userId, oldEmail, newEmail, password });
     return sendResponse(res, 200, { ...data }, ResponseMessages.genericSuccess);
   } catch (err) {
     return handleCustomError(res, err);
@@ -69,9 +70,9 @@ async function changeUserPasswordController(req, res) {
     }
 
     const { oldPassword, newPassword } = req.body;
-    const { id } = req.user;
+    const { userId } = req.params;
 
-    const data = await changeUserPassword({ id, oldPassword, newPassword });
+    const data = await changeUserPassword({ id: userId, oldPassword, newPassword });
 
     return sendResponse(res, 200, { ...data }, ResponseMessages.genericSuccess);
   } catch (err) {
@@ -90,10 +91,21 @@ async function deleteUserController(req, res) {
   }
 }
 
+async function getUsersController(req, res) {
+  try {
+    const data = await getUsers();
+
+    return sendResponse(res, 200, { ...data }, ResponseMessages.genericSuccess);
+  } catch (err) {
+    return handleCustomError(res, err);
+  }
+}
+
 module.exports = {
   createNewUserController,
   loginUserController,
   updateUserController,
   changeUserPasswordController,
-  deleteUserController
+  deleteUserController,
+  getUsersController
 };
