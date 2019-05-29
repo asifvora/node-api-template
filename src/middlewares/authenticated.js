@@ -1,6 +1,6 @@
 const { sendResponse, jwt } = require('../utils');
 
-async function isAuthenticated(req, res, next) {
+const isAuthenticated = async (req, res, next) => {
   const token = req.header('token');
 
   try {

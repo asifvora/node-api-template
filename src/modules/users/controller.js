@@ -9,7 +9,7 @@ const { createNewUser, loginUser, updateUser,
 const { sendResponse, handleCustomError } = require('../../utils');
 const ResponseMessages = require('../../constants/response-messages');
 
-async function createNewUserController(req, res) {
+const createNewUserController = async (req, res) => {
   try {
     const validationErr = validateCreateUserRequest(req);
 
@@ -26,7 +26,7 @@ async function createNewUserController(req, res) {
   }
 }
 
-async function loginUserController(req, res) {
+const loginUserController = async (req, res) => {
   try {
     const validationErr = validateLoginRequest(req);
 
@@ -43,7 +43,7 @@ async function loginUserController(req, res) {
   }
 }
 
-async function updateUserController(req, res) {
+const updateUserController = async (req, res) => {
   try {
     const validationErr = validateUpdateUserRequest(req);
 
@@ -61,7 +61,7 @@ async function updateUserController(req, res) {
   }
 }
 
-async function changeUserPasswordController(req, res) {
+const changeUserPasswordController = async (req, res) => {
   try {
     const validationErr = validateChangePasswordRequest(req);
 
@@ -80,7 +80,7 @@ async function changeUserPasswordController(req, res) {
   }
 }
 
-async function deleteUserController(req, res) {
+const deleteUserController = async (req, res) => {
   try {
     const { userId } = req.params;
     const data = await deleteUser({ id: userId });
@@ -91,7 +91,7 @@ async function deleteUserController(req, res) {
   }
 }
 
-async function getUsersController(req, res) {
+const getUsersController = async (req, res) => {
   try {
     const data = await getUsers();
 

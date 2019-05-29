@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Users = require('./model');
 const { hashPayload, jwt } = require('../../utils');
 
-async function createNewUser({ email, password, firstName, lastName }) {
+const createNewUser = async ({ email, password, firstName, lastName }) => {
   const res = await Users.findOne({ email: email });
 
   if (res) {
@@ -24,7 +24,7 @@ async function createNewUser({ email, password, firstName, lastName }) {
   };
 }
 
-async function loginUser({ email, password }) {
+const loginUser = async ({ email, password }) => {
   const hashedPassword = await hashPayload(password);
   const res = await Users.findOne({ email: email, password: hashedPassword });
 
@@ -50,7 +50,7 @@ async function loginUser({ email, password }) {
   };
 }
 
-async function updateUser({ id, firstName, lastName, email }) {
+const updateUser = async ({ id, firstName, lastName, email }) => {
   const res = await Users.findById({ _id: id });
 
   if (!res) {
@@ -78,7 +78,7 @@ async function updateUser({ id, firstName, lastName, email }) {
   };
 }
 
-async function changeUserPassword({ id, oldPassword, newPassword }) {
+const changeUserPassword = async ({ id, oldPassword, newPassword }) => {
   const res = await Users.findById({ _id: id });
 
   if (!res) {
@@ -105,7 +105,7 @@ async function changeUserPassword({ id, oldPassword, newPassword }) {
   return {};
 }
 
-async function deleteUser({ id }) {
+const deleteUser = async ({ id }) => {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const msg = 'Invalid id.';
@@ -128,7 +128,7 @@ async function deleteUser({ id }) {
   return {};
 }
 
-async function getUsers() {
+const getUsers = async () => {
   const users = await Users.find({}, { _id: 1, firstName: 1, lastName: 1, email: 1 });
 
   if (!users) {

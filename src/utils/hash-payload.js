@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-async function generateHash(payload) {
+const generateHash = async (payload) => {
   const hash = await crypto
     .createHash('sha512')
     .update(payload)

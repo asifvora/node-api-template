@@ -11,7 +11,7 @@
  * @param {string} message the message you want to send for success/failure
  */
 
-function sendResponse(res, statusCode, data = {}, message) {
+const sendResponse = (res, statusCode, data = {}, message) => {
   if (typeof statusCode !== 'number') {
     throw new Error('statusCode should be a number');
   }

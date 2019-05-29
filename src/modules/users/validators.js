@@ -1,4 +1,4 @@
-function validateLoginRequest(req) {
+const validateLoginRequest = (req) => {
   req
     .checkBody('email', 'user email is required/invalid')
     .isEmail()
@@ -10,7 +10,7 @@ function validateLoginRequest(req) {
   return req.validationErrors();
 }
 
-function validateCreateUserRequest(req) {
+const validateCreateUserRequest = (req) => {
   req
     .checkBody('email', 'user email is required/invalid')
     .isEmail()
@@ -32,7 +32,7 @@ function validateCreateUserRequest(req) {
   return req.validationErrors();
 }
 
-function validateUpdateUserRequest(req) {
+const validateUpdateUserRequest = (req) => {
   req
     .checkBody('email', 'user email is required/invalid')
     .isEmail()
@@ -50,7 +50,7 @@ function validateUpdateUserRequest(req) {
   return req.validationErrors();
 }
 
-function validateChangePasswordRequest(req) {
+const validateChangePasswordRequest = (req) => {
   req
     .checkBody('oldPassword', 'user oldPassword is required')
     .isLength({ min: 6 })
