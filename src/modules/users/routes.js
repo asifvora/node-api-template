@@ -1,8 +1,8 @@
 const userRoutes = require('express').Router();
-const isAuthenticated = require('../../middlewares/isAuthenticated');
+const isAuthenticated = require('../../middlewares/authenticated');
 const { loginUserController, createNewUserController,
   updateUserController, changeUserPasswordController,
-  getUsersController, deleteUserController } = require('./users.controller');
+  getUsersController, deleteUserController } = require('./controller');
 
 userRoutes.get('/users', getUsersController);
 userRoutes.post('/users/login', loginUserController);

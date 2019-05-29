@@ -1,5 +1,5 @@
-const sendResponse = require('./sendResponse');
-const ResponseMessages = require('../constants/responseMessages');
+const sendResponse = require('./send-response');
+const ResponseMessages = require('../constants/response-messages');
 
 function handleCustomThrow(res, error) {
   console.log('error', error);

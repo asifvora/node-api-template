@@ -1,6 +1,6 @@
-const hashPayload = require('./hashPayload');
-const sendResponse = require('./sendResponse');
-const handleCustomError = require('./handleCustomErrors');
+const hashPayload = require('./hash-payload');
+const sendResponse = require('./send-response');
+const handleCustomError = require('./handle-custom-errors');
 const {
   createAccessToken,
   decryptAccessToken,

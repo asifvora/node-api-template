@@ -3,11 +3,11 @@ const {
   validateCreateUserRequest,
   validateUpdateUserRequest,
   validateChangePasswordRequest,
-} = require('./users.request.validators');
+} = require('./validators');
 const { createNewUser, loginUser, updateUser,
-  changeUserPassword, deleteUser, getUsers } = require('./users.services');
+  changeUserPassword, deleteUser, getUsers } = require('./services');
 const { sendResponse, handleCustomError } = require('../../utils');
-const ResponseMessages = require('../../constants/responseMessages');
+const ResponseMessages = require('../../constants/response-messages');
 
 async function createNewUserController(req, res) {
   try {

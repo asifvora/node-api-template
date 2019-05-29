@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Users = require('./users.model');
+const Users = require('./model');
 const { hashPayload, jwt } = require('../../utils');
 
 async function createNewUser({ email, password, firstName, lastName }) {
