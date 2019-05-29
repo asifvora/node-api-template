@@ -4,7 +4,7 @@ const {
   validateUpdateUserRequest,
   validateChangePasswordRequest,
 } = require('./users.request.validators');
-const { createNewUser, loginUser, updateUser, changeUserPassword } = require('./users.services');
+const { createNewUser, loginUser, updateUser, changeUserPassword, deleteUser } = require('./users.services');
 const { sendResponse, handleCustomError } = require('../../utils');
 const ResponseMessages = require('../../constants/responseMessages');
 
@@ -63,7 +63,7 @@ async function updateUserController(req, res) {
 async function changeUserPasswordController(req, res) {
   try {
     const validationErr = validateChangePasswordRequest(req);
-    
+
     if (validationErr) {
       return sendResponse(res, 422, {}, validationErr[0].msg);
     }
@@ -79,9 +79,21 @@ async function changeUserPasswordController(req, res) {
   }
 }
 
+async function deleteUserController(req, res) {
+  try {
+    const { userId } = req.params;
+    const data = await deleteUser({ id: userId });
+
+    return sendResponse(res, 200, { ...data }, ResponseMessages.genericSuccess);
+  } catch (err) {
+    return handleCustomError(res, err);
+  }
+}
+
 module.exports = {
   createNewUserController,
   loginUserController,
   updateUserController,
   changeUserPasswordController,
+  deleteUserController
 };

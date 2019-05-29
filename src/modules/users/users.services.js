@@ -1,4 +1,4 @@
-const { MySQL } = require('../../db');
+const mongoose = require('mongoose');
 const Users = require('./users.model');
 const { hashPayload, jwt } = require('../../utils');
 
@@ -55,10 +55,7 @@ async function loginUser({ email, password }) {
 async function updateUser({
   userId, oldEmail, newEmail, password,
 }) {
-  const res = await MySQL.sequelize.query('SELECT * FROM users WHERE id = ?', {
-    type: MySQL.sequelize.QueryTypes.SELECT,
-    replacements: [userId],
-  });
+  const res = [];
 
   if (!res[0]) {
     const msg = 'User not found in records';
@@ -86,10 +83,7 @@ async function updateUser({
     throw err;
   }
 
-  await MySQL.sequelize.query('UPDATE users SET email = ? WHERE id = ?', {
-    type: MySQL.sequelize.QueryTypes.UPDATE,
-    replacements: [newEmail, userId],
-  });
+  // await 
   return {};
 }
 
@@ -120,9 +114,33 @@ async function changeUserPassword({ id, oldPassword, newPassword }) {
   return {};
 }
 
+async function deleteUser({ id }) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    const msg = 'Invalid id.';
+    const err = new Error(msg);
+    err.code = 422;
+    err.msg = msg;
+    throw err;
+  }
+
+  const res = await Users.findOneAndDelete({ _id: id });
+
+  if (!res) {
+    const msg = 'User not found in records';
+    const err = new Error(msg);
+    err.code = 404;
+    err.msg = msg;
+    throw err;
+  }
+
+  return {};
+}
+
 module.exports = {
   createNewUser,
   loginUser,
   updateUser,
-  changeUserPassword
+  changeUserPassword,
+  deleteUser
 };

@@ -18,6 +18,9 @@ function handleCustomThrow(res, error) {
   if (error.code === 409) {
     return sendResponse(res, error.code, {}, error.msg || error.message);
   }
+  if (error.code === 422) {
+    return sendResponse(res, error.code, {}, error.msg || error.message);
+  }
   return sendResponse(res, 500, error , ResponseMessages.genericError);
 }
 

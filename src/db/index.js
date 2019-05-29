@@ -1,5 +1,3 @@
 const MongoDB = require('./mongodb');
 
-module.exports = {
-  MongoDB,
-};
+module.exports = MongoDB;

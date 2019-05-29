@@ -11,6 +11,9 @@ if (result.error) {
 // custom modules
 const allRoutes = require('./routes');
 
+// db connection
+require('./db');
+
 const { PORT } = process.env;
 
 const app = express();
