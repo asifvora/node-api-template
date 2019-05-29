@@ -129,7 +129,7 @@ async function deleteUser({ id }) {
 }
 
 async function getUsers() {
-  const users = await Users.find();
+  const users = await Users.find({}, { _id: 1, firstName: 1, lastName: 1, email: 1 });
 
   if (!users) {
     const msg = 'Record not available.';
