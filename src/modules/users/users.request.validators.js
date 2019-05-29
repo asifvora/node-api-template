@@ -32,7 +32,7 @@ function validateCreateUserRequest(req) {
   return req.validationErrors();
 }
 
-function validateChangeEmailRequest(req) {
+function validateUpdateUserRequest(req) {
   req
     .checkBody('oldEmail', 'user oldEmail is required/invalid')
     .isEmail()
@@ -63,6 +63,6 @@ function validateChangePasswordRequest(req) {
 module.exports = {
   validateLoginRequest,
   validateCreateUserRequest,
-  validateChangeEmailRequest,
+  validateUpdateUserRequest,
   validateChangePasswordRequest,
 };
