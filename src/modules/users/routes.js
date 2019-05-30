@@ -4,7 +4,7 @@ const { loginUserController, createNewUserController,
   updateUserController, changeUserPasswordController,
   getUsersController, deleteUserController } = require('./controller');
 
-userRoutes.get('/users', getUsersController);
+userRoutes.get('/users', isAuthenticated, getUsersController);
 userRoutes.post('/users/login', loginUserController);
 userRoutes.post('/users/new', createNewUserController);
 userRoutes.put('/users/update/:userId', isAuthenticated, updateUserController);
